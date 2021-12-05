@@ -1,8 +1,14 @@
-import admin, { ServiceAccount } from 'firebase-admin';
-import serviceAccount from './serviceAccountkey.json';
+import admin from 'firebase-admin';
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount as ServiceAccount),
-});
+const firebaseConfig = {
+  apiKey: process.env.APIKEY,
+  authDomain: process.env.AUTHDOMAIN,
+  projectId: process.env.PROJECTID,
+  project_id: process.env.PROJECTID,
+  storageBucket: process.env.STORAGEBUCKET,
+  messagingSenderId: process.env.MESSAGINGSENDERID,
+  appId: process.env.APPID,
+};
+admin.initializeApp(firebaseConfig);
 
 export const db = admin.firestore();
