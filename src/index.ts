@@ -46,9 +46,6 @@ app.get(
     res.redirect('http://localhost:3000');
   }
 );
-app.get('/home', ensureAuthenticated, (req, res) => {
-  res.redirect('http://localhost:3000/');
-});
 
 app.get('/isauth', (req, res) => {
   if (req.user) {
@@ -60,12 +57,10 @@ app.get('/isauth', (req, res) => {
 });
 
 app.get('/getuser', (req, res) => {
-  console.log('getuser');
   res.send(req.user);
 });
 
 app.get('/auth/logout', (req, res) => {
-  console.log('logout');
   if (req.user) {
     console.log('logout user');
     req.logout();
@@ -82,14 +77,6 @@ function ensureAuthenticated(
   else res.redirect('http://localhost:3000/login');
 }
 
-// const isLogged = (req, res, next) => {
-//   if (req.isAuth()) {
-//     return next();
-//   } else {
-//     res.redirect('/login');
-//   }
-// };
-
-app.listen(4000, () => {
+app.listen(process.env.port || 4000, () => {
   console.log('server started');
 });
